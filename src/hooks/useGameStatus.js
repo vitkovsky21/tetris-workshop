@@ -5,17 +5,17 @@ export const useGameStatus = rowsCleared => {
     const [rows, setRows] = useState(0);
     const [level, setLevel] = useState(0);
 
+    // eslint-disable-next-line
     const linePoints = [40, 100, 300, 1200];
 
     const calcScore = useCallback(() => {
         if (rowsCleared > 0) {
-            setScore(prev => prev + linePoints[rowsCleared / 2 - 1] * (level + 1));
-            setRows(prev => prev + rowsCleared / 2);
+            setScore(prev => prev + linePoints[rowsCleared - 1] * (level + 1));
+            setRows(prev => prev + rowsCleared);
         }
     }, [level, linePoints, rowsCleared]);
 
     useEffect(() => {
-        console.log(rows, level, score)
         calcScore();
     }, [calcScore, rowsCleared, score]);
 

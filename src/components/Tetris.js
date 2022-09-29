@@ -25,8 +25,12 @@ const Tetris = () => {
     const [score, setScore, rows, setRows, level, setLevel] = useGameStatus(rowsCleared);
 
     const movePlayer = dir => {
-        if (!checkCollision(player, stage, { x: dir, y: 0 })) {    
-            updatePlayerPos({ x: dir, y: 0 })
+        if (!checkCollision(player, stage, { x: dir, y: 0 })) {   
+            if (dir > 0) {  
+                updatePlayerPos({ x: dir + 1, y: 0 })
+            } else {
+                updatePlayerPos({ x: dir - 1, y: 0 })
+            }
         }
     }
 
@@ -46,7 +50,8 @@ const Tetris = () => {
             setDropTime(1000 / (level + 1) + 200);
         }
         if (!checkCollision(player, stage, { x: 0, y: 1 })) {
-            updatePlayerPos({ x: 0, y: 1, collided: false })
+            console.log("UPDATE COl")
+            updatePlayerPos({ x: 0, y: 2, collided: false })
         } else {
             if (player.pos.y < 1) {
                 console.log("GAME OVER");

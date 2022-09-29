@@ -11,10 +11,11 @@ export const checkCollision = (player, stage, { x: moveX, y: moveY }) => {
     for (let x = 0; x < player.tetromino[y].length; x += 1) {
       if (player.tetromino[y][x] !== 0) {
         if (
-          !stage[y + player.pos.y + moveY] ||
-          !stage[y + player.pos.y + moveY][x + player.pos.x + moveX] ||
-          stage[y + player.pos.y + moveY][x + player.pos.x + moveX][1] !== 'clear'
+          !stage[Math.round(y + player.pos.y + moveY)] ||
+          !stage[Math.round(y + player.pos.y + moveY)][Math.round(x + player.pos.x + moveX)] ||
+          stage[Math.round(y + player.pos.y + moveY)][Math.round(x + player.pos.x + moveX)][1] !== 'clear'
         ) {
+          console.log("STEP")
           return true;
         }
       }
